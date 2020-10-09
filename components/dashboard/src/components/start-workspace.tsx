@@ -426,7 +426,7 @@ export class StartWorkspace extends React.Component<StartWorkspaceProps, StartWo
                             errorMessage={errorMessage}
                             errorMode={isError}
                             branding={ctx.branding}
-                            showFixedLogo={this.state.workspaceInstance && this.state.workspaceInstance.status.phase === 'stopped'}>
+                            showFixedLogo={true}>
                             <LicenseCheck service={this.props.service.server} />
                             <div className="progress"><div className="runner" style={{ width: this.getProgress() + "%" }}></div></div>
                             {message}
