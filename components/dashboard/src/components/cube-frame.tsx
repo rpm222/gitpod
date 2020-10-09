@@ -12,6 +12,7 @@ export interface CubeFrameProps {
     errorMode: boolean;
     errorMessage?: string;
     branding?: Branding;
+    showFixedLogo?: boolean;
 }
 
 export interface CubeFrameState {
@@ -19,6 +20,9 @@ export interface CubeFrameState {
 }
 
 export class CubeFrame extends React.Component<CubeFrameProps, CubeFrameState> {
+    
+    private static readonly DEFAULT_STATIC_LOGO = "/images/gitpod-logo-no-text.svg";
+
     private canvas: HTMLCanvasElement | null;
     private bootanimation?: Bootanimation;
 
@@ -30,6 +34,10 @@ export class CubeFrame extends React.Component<CubeFrameProps, CubeFrameState> {
             this.state = {
                 fixedLogo: this.props.branding!.startupLogo
             };
+        } else if(!!props.showFixedLogo) {
+            this.state = {
+                fixedLogo: CubeFrame.DEFAULT_STATIC_LOGO
+            }
         }
     }
 
@@ -47,7 +55,7 @@ export class CubeFrame extends React.Component<CubeFrameProps, CubeFrameState> {
                 this.bootanimation.start();
             } catch (err) {
                 console.warn("WebGL is not supported");
-                let fixedLogo = "/images/gitpod-logo-no-text.svg";
+                let fixedLogo = CubeFrame.DEFAULT_STATIC_LOGO;
                 if (this.props.branding && this.props.branding.startupLogo) {
                     fixedLogo = this.props.branding.startupLogo;
                 }
